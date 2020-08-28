@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require('apollo-server');
+const { ApolloServer, gql, ApolloError } = require('apollo-server');
 const SessionAPI = require('./datasources/session');
 const SpeakerAPI = require('./datasources/speakers');
 
@@ -14,7 +14,11 @@ const dataSources = () => ({
 const server = new ApolloServer({
     typeDefs, 
     resolvers, 
-    dataSources
+    dataSources,
+    debug: false,
+    formatError: (err) => {
+        return err;
+    }
 });
 
 server 
